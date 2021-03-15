@@ -23,16 +23,18 @@ public class clienteService {
 		return clienteRepositori.findAll();
 	}
 	
-	public Optional<cliente>BuscarPorId(Long id){
+	public Optional<cliente> BuscarPorId(Long id){
 		return clienteRepositori.findById(id);
 	}
 	
 	public cliente Guardar(cliente client) {
-		
 		return clienteRepositori.save(client);
 	}
-	
+
+
 	public void EliminarCliente(Long id) {
-		clienteRepositori.deleteById(id);
+		 clienteRepositori.deleteById(id);
 	}
+	
+
 }

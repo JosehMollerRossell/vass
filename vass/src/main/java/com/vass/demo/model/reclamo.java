@@ -7,7 +7,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
+@Data @AllArgsConstructor @NoArgsConstructor
 public class reclamo implements Serializable{
 private static final long serialVersionUID = 1L;
 	
@@ -16,33 +21,7 @@ private static final long serialVersionUID = 1L;
 	private int idReclamo;
 	private String motivoReclamo;
 	private String descripcionReclamo;
-	public int getIdReclamo() {
-		return idReclamo;
-	}
-	public void setIdReclamo(int idReclamo) {
-		this.idReclamo = idReclamo;
-	}
-	public String getMotivoReclamo() {
-		return motivoReclamo;
-	}
-	public void setMotivoReclamo(String motivoReclamo) {
-		this.motivoReclamo = motivoReclamo;
-	}
-	public String getDescripcionReclamo() {
-		return descripcionReclamo;
-	}
-	public void setDescripcionReclamo(String descripcionReclamo) {
-		this.descripcionReclamo = descripcionReclamo;
-	}
-	public reclamo(int idReclamo, String motivoReclamo, String descripcionReclamo) {
-		super();
-		this.idReclamo = idReclamo;
-		this.motivoReclamo = motivoReclamo;
-		this.descripcionReclamo = descripcionReclamo;
-	}
-	public reclamo() {
-		super();
-	} 
+	
 	
 	
 }

@@ -2,8 +2,13 @@ package com.vass.demo.controller;
 
 import java.util.List;
 
+import com.vass.demo.model.producto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +20,8 @@ import com.vass.demo.model.cliente;
 //import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vass.demo.service.clienteService;
 
+import io.swagger.models.Path;
+
 @RestController
 public class clienteController {
 
@@ -23,26 +30,29 @@ public class clienteController {
 	
 	protected ObjectMapper objectMapper;
 	//LISTAR TODOS LOS CLIENTES
-		@RequestMapping(value = "/ListarClientes", method = RequestMethod.GET)
+		@RequestMapping(value = "/listar-clientes", method = RequestMethod.GET)
 		public List<cliente>ListarUsuarios(){
 			return clienteservice.ListarClientes();
 		}
 		
-		//GUARDAR O ACTUALIZAR CLIENTE
-		@RequestMapping(value = "/GuardarActualizar", method = RequestMethod.POST)
+		//GUARDAR  CLIENTE sin idempotencia
+		@RequestMapping(value = "/guardar", method = RequestMethod.POST)
 		public cliente GuardaroActualizar(@RequestBody cliente client){		
 			return clienteservice.Guardar(client);
 		}
 		
-		//ELIMINAR
-		@RequestMapping(value = "/EliminarCliente", method = RequestMethod.POST)
-		public void EliminarCliente(@RequestBody String UserJSON) throws Exception{
+
+		//actualizar
+		/*@RequestMapping(value = "/eliminar-cliente", method = RequestMethod.POST)
+		public void EliminarProducto(@RequestBody String UserJSON) throws Exception{
 			this.objectMapper = new ObjectMapper();
-			cliente client = this.objectMapper.readValue(UserJSON, cliente.class);
-			if (Long.valueOf(client.getIdCliente())==null) {
-				throw new Exception("EL CODIGO ID ES NULO");			
-			}
-			clienteservice.EliminarCliente( (long) client.getIdCliente());
-			//clienteService.EliminarCliente((long) cliente.getIdUsuario());
+			producto produc = this.objectMapper.readValue(UserJSON, producto.class);
+			clienteservice.EliminarCliente((long) produc.getIdProducto());
+		}*/
+
+		@RequestMapping(value = "/delete-client/{id}", method = RequestMethod.DELETE)
+		public void getCliente(@PathVariable("id")Long id){
+			  clienteservice.EliminarCliente(id);
 		}
+		   
 }
