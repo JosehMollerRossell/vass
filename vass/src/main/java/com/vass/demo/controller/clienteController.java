@@ -30,29 +30,26 @@ public class clienteController {
 	
 	protected ObjectMapper objectMapper;
 	//LISTAR TODOS LOS CLIENTES
-		@RequestMapping(value = "/listar-clientes", method = RequestMethod.GET)
+		@RequestMapping(value = "/listarclientes", method = RequestMethod.GET)
 		public List<cliente>ListarUsuarios(){
 			return clienteservice.ListarClientes();
 		}
 		
 		//GUARDAR  CLIENTE sin idempotencia
-		@RequestMapping(value = "/guardar", method = RequestMethod.POST)
+		@RequestMapping(value = "/guardarCliente", method = RequestMethod.POST)
 		public cliente GuardaroActualizar(@RequestBody cliente client){		
 			return clienteservice.Guardar(client);
 		}
-		
 
-		//actualizar
-		/*@RequestMapping(value = "/eliminar-cliente", method = RequestMethod.POST)
-		public void EliminarProducto(@RequestBody String UserJSON) throws Exception{
-			this.objectMapper = new ObjectMapper();
-			producto produc = this.objectMapper.readValue(UserJSON, producto.class);
-			clienteservice.EliminarCliente((long) produc.getIdProducto());
-		}*/
 
-		@RequestMapping(value = "/delete-client/{id}", method = RequestMethod.DELETE)
-		public void getCliente(@PathVariable("id")Long id){
-			  clienteservice.EliminarCliente(id);
+	@RequestMapping(value = "/EliminarCliente", method = RequestMethod.POST)
+	public void EliminarCliente(@RequestBody String UserJSON) throws Exception{
+		this.objectMapper = new ObjectMapper();
+		cliente client = this.objectMapper.readValue(UserJSON, cliente.class);
+		if (Long.valueOf(client.getIdCliente())==null) {
+			throw new Exception("EL CODIGO ID ES NULO");
 		}
+		clienteservice.EliminarCliente((long) client.getIdCliente());
+	}
 		   
 }

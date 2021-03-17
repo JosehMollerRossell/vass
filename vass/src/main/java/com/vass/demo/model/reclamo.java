@@ -21,7 +21,6 @@ private static final long serialVersionUID = 1L;
 	private int idReclamo;
 	private String motivoReclamo;
 	private String descripcionReclamo;
-	
-	
-	
+
+
 }

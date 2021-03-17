@@ -3,10 +3,7 @@ package com.vass.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -35,13 +32,13 @@ public class reclamoController {
 		
 		//ELIMINAR
 		@RequestMapping(value = "/EliminarReclamo", method = RequestMethod.POST)
-		public void EliminarCliente(@RequestBody String UserJSON) throws Exception{
+		public void EliminarReclamo(@RequestBody String UserJSON) throws Exception{
 			this.objectMapper = new ObjectMapper();
-			reclamo recl= this.objectMapper.readValue(UserJSON, reclamo.class);
+			reclamo recl = this.objectMapper.readValue(UserJSON, reclamo.class);
 			if (Long.valueOf(recl.getIdReclamo())==null) {
-				throw new Exception("EL CODIGO ID ES NULO");			
+				throw new Exception("EL CODIGO ID ES NULO");
 			}
 			reclamoservice.EliminarReclamo((long) recl.getIdReclamo());
-			//clienteService.EliminarCliente((long) cliente.getIdUsuario());
 		}
+
 }

@@ -34,7 +34,6 @@ private static final long serialVersionUID = 1L;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaNacimiento;
-	
 
 
 }
